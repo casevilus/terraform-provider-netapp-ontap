@@ -125,6 +125,7 @@ func (r *RestClient) CallDeleteMethod(baseURL string, query *RestQuery, body map
 
 // GetNilOrOneRecord returns nil if no record is found or a single record.  An error is reported if multiple records are received.
 func (r *RestClient) GetNilOrOneRecord(baseURL string, query *RestQuery, body map[string]interface{}) (int, map[string]interface{}, error) {
+	query.Set("return_timeout", "60")
 	statusCode, response, err := r.callAPIMethod("GET", baseURL, query, body)
 	if err != nil {
 		return statusCode, nil, err
@@ -142,6 +143,7 @@ func (r *RestClient) GetNilOrOneRecord(baseURL string, query *RestQuery, body ma
 
 // GetZeroOrMoreRecords returns a list of records.
 func (r *RestClient) GetZeroOrMoreRecords(baseURL string, query *RestQuery, body map[string]interface{}) (int, []map[string]interface{}, error) {
+	query.Set("return_timeout", "60")
 	statusCode, response, err := r.callAPIMethod("GET", baseURL, query, body)
 	if err != nil {
 		return statusCode, nil, err
